@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Parikshe UI Recreation
 
-## Getting Started
+Rebuild of the Parikshe website using Next.js (App Router), TypeScript, Tailwind CSS, and mock APIs. Includes responsive layouts, reusable components, and stateful flows that mirror the original UX.
 
-First, run the development server:
+## Stack
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4
+- Native fetch calls with environment-based API base URL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project setup
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Create environment file:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Adjust `NEXT_PUBLIC_API_BASE_URL` if you proxy APIs.
+3. Run the dev server:
+   ```bash
+   npm run dev
+   ```
+   Visit http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Implemented screens
+- Home (hero, highlights, feature grid, API-driven course listing, testimonials, CTA)
+- About (pillars, kept flows, stack choices, mission)
+- Careers (open roles, culture, hiring process)
+- Contact (contact options + validated form hitting mock API)
+- SSLC Study (modules, weekly rhythm, support CTA)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Mock APIs
+- GET /api/courses – list of courses
+- GET /api/courses/:id – single course
+- POST /api/contact – accepts `{ name, email, message }`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Client components display loading/success/error states when consuming these endpoints. API base URL is driven by `NEXT_PUBLIC_API_BASE_URL` with a local fallback to `/api`.
 
-## Learn More
+## Folder hints
+- src/app – routes and layouts
+- src/components – shared UI (header, footer, section heading, course grid, contact form)
+- src/lib/api-client.ts – helpers for GET/POST with env-based base URL
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+Deploy directly to Vercel or any Next.js-compatible host. Ensure environment variables are configured in the target platform.
