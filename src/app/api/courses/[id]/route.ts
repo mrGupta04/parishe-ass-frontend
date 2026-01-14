@@ -1,12 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { data } from "../route";
 
-type Params = {
-  params: { id: string };
-};
+type ParamsPromise = { params: Promise<{ id: string }> };
 
-export const GET = async (_request: Request, { params }: Params) => {
-  const course = data.find((item) => item.id === params.id);
+export const GET = async (_request: NextRequest, { params }: ParamsPromise) => {
+  const { id } = await params;
+  const course = data.find((item) => item.id === id);
   if (!course) {
     return NextResponse.json({ message: "Course not found" }, { status: 404 });
   }
